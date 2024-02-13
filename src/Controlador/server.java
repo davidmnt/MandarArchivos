@@ -85,7 +85,7 @@ public class server {
                             }
 
 
-                            FileOutputStream fileOutputStream = new FileOutputStream("src/filesReceived/" + nombreSinExtension + "_"
+                            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\DavidMontejanoM\\Desktop\\Servidor\\" + nombreSinExtension + "_"
                                     + ldt.getHour() + "_" + ldt.getMinute() + "_" + ldt.getSecond() + extension);
 
                             System.out.println("La extension es: " + extension);

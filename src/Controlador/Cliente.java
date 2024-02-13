@@ -78,6 +78,10 @@ public class Cliente {
     private void conexion(){
         final java.io.File FILE_PATH = selectedFile; // Cambia esto por la ruta de tu archivo
 
+        if(FILE_PATH == null){
+            JOptionPane.showMessageDialog(null,"Tienes que seleccionar un archivo previamente");
+        }
+
         try (Socket socket = new Socket("localhost", 2020)){
 
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
@@ -85,6 +89,7 @@ public class Cliente {
 
             FileInputStream fileInputStream = new FileInputStream(FILE_PATH);
             OutputStream outputStream = socket.getOutputStream();
+
 
             byte[] buffer = new byte[1024];
             int bytesRead;

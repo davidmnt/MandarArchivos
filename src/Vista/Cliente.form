@@ -73,7 +73,7 @@
           <component id="449f4" class="javax.swing.JButton" binding="btn_enviar">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
+                <preferred-size width="150" height="120"/>
               </grid>
             </constraints>
             <properties>
