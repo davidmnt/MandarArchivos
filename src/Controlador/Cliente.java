@@ -14,6 +14,7 @@ public class Cliente {
     private JMenuItem Abrir;
     private JLabel NombreArchivo;
     private JButton btn_enviar;
+    private JTextArea textArea1;
 
     java.io.File selectedFile;
     String nombreArchivo = "";
@@ -37,6 +38,11 @@ public class Cliente {
 
     public Cliente(){
 
+        ImageIcon i = new ImageIcon("src/resources/subir_1.png");
+        Image image = i.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(image);
+        btn_enviar.setIcon(scaledIcon);
+
         Abrir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,8 +51,6 @@ public class Cliente {
 
             }
         });
-
-
 
 
 

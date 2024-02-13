@@ -4,18 +4,17 @@ import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.DataInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
 public class server {
     private JPanel panelPrin;
     private JTextArea textArea;
     private JLabel Servirdor;
+    String ubicacionDir = "C:\\Users\\david\\Desktop\\Servidor\\";
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -55,6 +54,7 @@ public class server {
 
             System.out.println("Esperando archivo");
             textArea.append("Esperando archivo..." + "\n");
+            comprobarFile();
 
             new Thread(new Runnable() {
                 @Override
@@ -85,8 +85,8 @@ public class server {
                             }
 
 
-                            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\DavidMontejanoM\\Desktop\\Servidor\\" + nombreSinExtension + "_"
-                                    + ldt.getHour() + "_" + ldt.getMinute() + "_" + ldt.getSecond() + extension);
+                            FileOutputStream fileOutputStream = new FileOutputStream(ubicacionDir + nombreSinExtension + "_"
+                                        + ldt.getHour() + "_" + ldt.getMinute() + "_" + ldt.getSecond() + extension);
 
                             System.out.println("La extension es: " + extension);
 
@@ -108,6 +108,38 @@ public class server {
                     }
                 }
             }).start();
+
+    }
+
+    private void comprobarFile(){
+
+        boolean existe = false;
+
+        File f = new File("C:\\Users\\david\\Desktop");
+        File directorio = new File(ubicacionDir);
+
+        File[] listaFicheros = f.listFiles();
+
+        for(int i = 0;i< listaFicheros.length;i++){
+
+            if(listaFicheros[i].isDirectory()){
+
+                File dir = listaFicheros[i];
+
+                if(listaFicheros[i].getName().equals(directorio.getName())){
+                   existe = true;
+                }
+
+            }
+        }
+
+        if(existe == false){
+            directorio.mkdir();
+            System.out.println("Directorio creado");
+        }else {
+            System.out.println("Directorio existente");
+        }
+
 
     }
 }
