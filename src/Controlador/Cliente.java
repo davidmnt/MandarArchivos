@@ -15,9 +15,14 @@ public class Cliente {
     private JLabel NombreArchivo;
     private JButton btn_enviar;
     private JTextArea textArea1;
+    private JTextField labelIp;
+    private JLabel IP;
+    private JButton btn_conectar;
 
     java.io.File selectedFile;
     String nombreArchivo = "";
+
+    Socket socket = null;
 
 
     JFileChooser fileChooser = null;
@@ -58,7 +63,21 @@ public class Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                if(socket != null) {
+                    enviarArchivo(socket);
+                }else {
+                    JOptionPane.showMessageDialog(null,"La conexion es nula");
+                }
+
+            }
+        });
+
+        btn_conectar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
                 conexion();
+                labelIp.setText(" ");
 
             }
         });
@@ -74,20 +93,33 @@ public class Cliente {
             selectedFile = fileChooser.getSelectedFile();
             nombreArchivo = selectedFile.getName();
             NombreArchivo.setText(nombreArchivo);
-
-
+            textArea1.append("El archivo enviado es: " + nombreArchivo);
+            textArea1.append("\n");
         }
     }
 
     private void conexion(){
-        final java.io.File FILE_PATH = selectedFile; // Cambia esto por la ruta de tu archivo
+        String ip = labelIp.getText().toString();
+
+        try {
+            socket = new Socket(ip, 2020);
+
+            textArea1.append("Te has conectado al servidor: " + socket.getInetAddress().getHostAddress());
+            textArea1.append("\n");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void enviarArchivo(Socket socket) {
+        final File FILE_PATH = selectedFile;
 
         if(FILE_PATH == null){
             JOptionPane.showMessageDialog(null,"Tienes que seleccionar un archivo previamente");
         }
 
-        try (Socket socket = new Socket("localhost", 2020)){
-
+        try {
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(selectedFile.getName());
 
@@ -107,10 +139,10 @@ public class Cliente {
 
             System.out.println("Archivo enviado con éxito.");
 
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            textArea1.append("Archivo enviado con éxito.");
+            textArea1.append("\n");
+        }catch (IOException e){
+            e.getStackTrace();
         }
     }
 

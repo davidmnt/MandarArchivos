@@ -14,7 +14,7 @@ public class server {
     private JPanel panelPrin;
     private JTextArea textArea;
     private JLabel Servirdor;
-    String ubicacionDir = "C:\\Users\\david\\Desktop\\Servidor\\";
+    String ubicacionDir = "C:\\Users\\DavidMontejanoM\\Desktop\\Servidor\\";
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -30,12 +30,6 @@ public class server {
                 frame.setIconImage(icon.getImage());
 
                 frame.setVisible(true);
-
-
-
-                //Iocno del servidor
-
-
 
             }
         });
@@ -115,7 +109,7 @@ public class server {
 
         boolean existe = false;
 
-        File f = new File("C:\\Users\\david\\Desktop");
+        File f = new File("C:\\Users\\DavidMontejanoM\\Desktop");
         File directorio = new File(ubicacionDir);
 
         File[] listaFicheros = f.listFiles();
